@@ -8,8 +8,6 @@ const Contact = (props) => {
         <br />
         {props.data.location}
       </div>
-
-      <hr />
     </>
   );
 };

@@ -1,4 +1,6 @@
 import Contact from './components/Contact';
+import './styles/app.css';
+import Wrapper from './Wrapper';
 
 const App = () => {
   const contacts = [
@@ -10,15 +12,15 @@ const App = () => {
     { name: 'Sanish', number: '2222', location: 'Australia' },
     { name: 'Ram', number: '3333', location: 'USA' },
   ];
+
   return (
     <>
-      <div className='container'>
+      <Wrapper>
         <h3>Contact List:</h3>
-
         <Contact data={contacts[0]} />
         <Contact data={contacts[1]} />
         <Contact data={contacts[2]} />
-      </div>
+      </Wrapper>
     </>
   );
 };
