@@ -1,5 +1,6 @@
 import Contact from './components/Contact';
 import './styles/app.css';
+import Wrapper from './Wrapper';
 
 const App = () => {
   const contacts = [
@@ -12,18 +13,14 @@ const App = () => {
     { name: 'Ram', number: '3333', location: 'USA' },
   ];
 
-  // Dynamically pani color set garna milxa
-  const loggedIn = true;
-
   return (
     <>
-      <div className='container' style={{ color: loggedIn ? 'green' : 'red' }}>
+      <Wrapper>
         <h3>Contact List:</h3>
-
         <Contact data={contacts[0]} />
         <Contact data={contacts[1]} />
         <Contact data={contacts[2]} />
-      </div>
+      </Wrapper>
     </>
   );
 };
