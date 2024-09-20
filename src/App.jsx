@@ -1,6 +1,6 @@
 import Contact from './components/Contact';
+import ContactAdder from './components/ContactAdder';
 import './styles/app.css';
-import Wrapper from './Wrapper';
 
 const App = () => {
   const contacts = [
@@ -15,12 +15,16 @@ const App = () => {
 
   return (
     <>
-      <Wrapper>
+      <div className='contact_adder'>
+        <ContactAdder />
+      </div>
+
+      <div className='contact_list'>
         <h3>Contact List:</h3>
         <Contact data={contacts[0]} />
         <Contact data={contacts[1]} />
         <Contact data={contacts[2]} />
-      </Wrapper>
+      </div>
     </>
   );
 };
