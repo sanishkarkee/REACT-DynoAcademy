@@ -16,7 +16,7 @@ const App = () => {
   return (
     <>
       <div className='contact_adder'>
-        <ContactAdder />
+        <ContactAdder/>
       </div>
 
       <div className='contact_list'>
