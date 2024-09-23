@@ -1,12 +1,27 @@
-import { useState } from 'react';
+import { Component, useState } from 'react';
 
-const ContactAdder = () => {
+const ContactAdder = (props) => {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [location, setLocation] = useState('');
 
+  // READ THIS: click me button press gare paxi 3 ota operation hunxa
   const onClickHandler = () => {
-    console.log('Clicked');
+    // Entered data lai chai CUSTOM OBJECT structure banako
+    // 1) user le enter gareko data ko custom object banxa
+    const contactData = {
+      name: name,
+      number: mobile,
+      location: location,
+    };
+
+    // 2) custom object ma bhayeko data lai parent Component (App.jsx) ma pass garinxa
+    props.onContactAdded(contactData);
+
+    // 3) contact ADD bhaye chai input field clear garinxa
+    setName('');
+    setMobile('');
+    setLocation('');
   };
 
   return (
