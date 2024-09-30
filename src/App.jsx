@@ -15,6 +15,7 @@ import { useState } from 'react';
 import Contact from './components/Contact';
 import ContactAdder from './components/ContactAdder';
 import './styles/app.scss';
+import NavBar from './components/NavBar';
 
 const App = () => {
   // 2] localstorage ma save bhayeko data lai useState ma pass garem
@@ -33,6 +34,8 @@ const App = () => {
 
   return (
     <>
+      <NavBar />
+
       <div className='contact_adder'>
         <ContactAdder onContactAdded={addContactData} />
       </div>

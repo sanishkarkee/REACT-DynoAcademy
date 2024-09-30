@@ -1,3 +1,21 @@
+* {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav_bar {
+  background: #515aa5;
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 10px;
+  color: #fff;
+}
+
 .contact_list {
   background: #ccc;
   padding: 1rem;
@@ -6,15 +24,36 @@
 }
 
 .contact {
-  background: #979595;
+  background: #fff;
   border-radius: 0.625rem;
   padding: 0.3125rem;
   margin: 0.3125rem;
 }
 
 .contact_adder {
-  background: #ccc;
+  background: #c9c5c5;
   padding: 1rem;
   margin: 0.3125rem;
   border-radius: 0.3125rem;
+}
+
+.simpleAdder {
+  input {
+    border: 0;
+    padding: 0.625rem;
+    margin: 0.125rem;
+    border-radius: 0.625rem;
+    outline: none;
+  }
+
+  button {
+    border: 0;
+    padding: 0.625rem;
+    margin: 0.125rem;
+    border-radius: 0.625rem;
+    outline: none;
+    background: #515aa5;
+    color: #fff;
+    cursor: pointer;
+  }
 }
