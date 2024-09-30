@@ -14,7 +14,7 @@
 import { useState } from 'react';
 import Contact from './components/Contact';
 import ContactAdder from './components/ContactAdder';
-import './styles/app.css';
+import './styles/app.scss';
 
 const App = () => {
   // 2] localstorage ma save bhayeko data lai useState ma pass garem
@@ -40,7 +40,7 @@ const App = () => {
       <div className='contact_list'>
         <h3>Contact List:</h3>
 
-        {/* Map garda chai id ma array ko index OR cutsom ID ni pass garna sakinxa */}
+        {/* Map garda chai id ma array ko index (NOT RECOMMENDED) OR cutsom ID ni pass garna sakinxa */}
 
         {/* index ma chai array ko number hunxa like 0,1,2,...
         {contacts.map((data, index) => {
