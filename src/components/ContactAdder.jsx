@@ -16,19 +16,24 @@ const ContactAdder = (props) => {
       location: location,
     };
 
-    // 2) custom object ma bhayeko data lai parent Component (App.jsx) ma pass garinxa
-    props.onContactAdded(contactData);
+    //Checking empty input fields OR Validation
+    if (name.length < 1 || mobile.length < 1 || location.length < 1) {
+      alert('Please fill all the fields');
+    } else {
+      // 2) custom object ma bhayeko data lai parent Component (App.jsx) ma pass garinxa
+      props.onContactAdded(contactData);
 
-    // 3) contact ADD bhaye chai input field clear garinxa
-    setName('');
-    setMobile('');
-    setLocation('');
+      // 3) contact ADD bhaye chai input field clear garinxa
+      setName('');
+      setMobile('');
+      setLocation('');
+    }
   };
 
   return (
     <>
       <div className='simpleAdder'>
-        Contact Adder: <br />
+        <h3>Contact Adder:</h3> <br />
         <input
           type='text'
           value={name}
@@ -58,7 +63,7 @@ const ContactAdder = (props) => {
         />
         <br />
         <br />
-        <button onClick={onClickHandler}>Click me!</button>
+        <button onClick={onClickHandler}>Add Contact</button>
       </div>
     </>
   );
