@@ -10,6 +10,7 @@ const ContactAdder = (props) => {
     // Entered data lai chai CUSTOM OBJECT structure banako
     // 1) user le enter gareko data ko custom object banxa
     const contactData = {
+      id: Math.random(), //Random key generate gareko, Mapping/display garda use hunxa so
       name: name,
       number: mobile,
       location: location,

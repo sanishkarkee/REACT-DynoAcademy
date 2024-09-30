@@ -17,22 +17,18 @@ import ContactAdder from './components/ContactAdder';
 import './styles/app.css';
 
 const App = () => {
-  const initialContacts = [
-    {
-      name: 'John',
-      number: '1111',
-      location: 'Nepal',
-    },
-    { name: 'Sanish', number: '2222', location: 'Australia' },
-    { name: 'Ram', number: '3333', location: 'USA' },
-  ];
+  // 2] localstorage ma save bhayeko data lai useState ma pass garem
+  const getContacts = JSON.parse(localStorage.getItem('contacts'));
 
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(getContacts ? getContacts : []);
 
   // ContactAdder.js bhayeko custom object ko data ACCESS garna lai
   const addContactData = (contactData) => {
-    setContacts([contactData, ...contacts]);
-    // console.log(contacts);
+    const allContacts = [contactData, ...contacts];
+    setContacts(allContacts);
+
+    // 1] aako data lai localstorage ma save garem
+    localStorage.setItem('contacts', JSON.stringify(allContacts));
   };
 
   return (
@@ -44,10 +40,19 @@ const App = () => {
       <div className='contact_list'>
         <h3>Contact List:</h3>
 
-        {/* ()=> { must use RETURN keyword } /  ()=> ( dont need to use RETURN keyword) */}
+        {/* Map garda chai id ma array ko index OR cutsom ID ni pass garna sakinxa */}
+
+        {/* index ma chai array ko number hunxa like 0,1,2,...
+        {contacts.map((data, index) => {
+          // console.log(data);
+          return <Contact key={index} data={data} />;
+        })}
+
+              OR */}
+
         {contacts.map((data) => {
           // console.log(data);
-          return <Contact data={data} />;
+          return <Contact key={data.id} data={data} />;
         })}
       </div>
     </>
