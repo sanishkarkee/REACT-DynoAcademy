@@ -6,34 +6,70 @@ function App() {
 
   const [movies, setMovies] = useState([]);
 
-  const fetchMovies = async () => {
-    // 1)- Fetch resource...
-    console.log('Calling API');
+  // Kun case ma error message dekhauna ko lagi
+  const [isError, setIsError] = useState(false);
 
+  // For displaying CUSOTM ERROR MESSAGE
+  const [errorText, setErrorText] = useState('');
+
+  const fetchMovies = async () => {
     try {
       const response = await axios.get(
-        'https://api.dynoacademy.com/test-api/v12/movies'
+        'https://api.dynoacademy.com/test-api/v1/movies'
       );
       setMovies(response.data.moviesData); //Axios le jaile pani "data" bhitra data haru pathako hunxa
+      setIsError(false);
     } catch (error) {
-      alert('Cannot get movies data.');
+      setIsError(true);
+      setErrorText('Cannot get movies info!');
     }
 
     console.log(movies);
   };
 
-  return ( 
+  return (
     <div className='App'>
       <button onClick={fetchMovies}>Get all movies</button>
       <br />
 
-      <div style={{ background: '#e7e7e7', padding: '10px', margin: '5px' }}>
-        {movies.map((el) => (
-          <div key={el.id} style={{ marginBottom: '10px' }}>
-            {el.name}
+      {/* Error aako ra na-aako case ma k dekhaune: */}
+      {isError ? (
+        <>
+          <div
+            style={{
+              background: 'red',
+              color: '#fff',
+              padding: '10px',
+              margin: '10px',
+            }}
+          >
+            {errorText}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{ background: '#e7e7e7', padding: '10px', margin: '5px' }}
+          >
+            {movies.map((el) => (
+              <div key={el.id} style={{ marginBottom: '20px' }}>
+                <span style={{ fontWeight: 'bold' }}>{el.name}</span>
+                <br />
+                <img
+                  src={el.image}
+                  alt='Movie Image'
+                  style={{ width: '80px', height: '100px' }}
+                />
+                <br />
+                Info:{el.info}
+                <br />
+                Rating: {el.rating ? el.rating : '0'}
+                <br />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
