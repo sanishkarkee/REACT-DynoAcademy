@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
@@ -13,6 +13,10 @@ const Index = () => {
 
   // For displaying CUSOTM ERROR MESSAGE
   const [errorText, setErrorText] = useState('');
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   const fetchMovies = async () => {
     try {
@@ -31,9 +35,9 @@ const Index = () => {
 
   return (
     <div className='App'>
-      <button onClick={fetchMovies}>Get all movies</button>
-      <br />
+      <b>SUGGESTED MOVIES:</b>
 
+      <br />
       {/* Error aako ra na-aako case ma k dekhaune: */}
       {isError ? (
         <>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ViewMovie = () => {
@@ -8,6 +8,10 @@ const ViewMovie = () => {
   //   console.log(getId);
 
   const [movieData, setMovieData] = useState({});
+
+  useEffect(() => {
+    getSingleMovieInfo();
+  }, []);
 
   const getSingleMovieInfo = async () => {
     try {
@@ -23,10 +27,7 @@ const ViewMovie = () => {
 
   return (
     <>
-      View Movies {getId}
-      <button onClick={getSingleMovieInfo}>
-        View This movie Details!
-      </button>{' '}
+      <b>View Movies: </b> {getId}
       <br />
       <h2>Movie Detail:</h2>
       <br />
