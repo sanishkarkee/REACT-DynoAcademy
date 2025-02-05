@@ -14,14 +14,23 @@ const Index = () => {
   // For displaying CUSOTM ERROR MESSAGE
   const [errorText, setErrorText] = useState('');
 
+  // For Searching Movies
+  const [searchMovieText, setSearchMovieText] = useState('');
+
   useEffect(() => {
     fetchMovies();
   }, []);
 
+  // For Searching Movies
+  useEffect(() => {
+    fetchMovies();
+  }, [searchMovieText]);
+
   const fetchMovies = async () => {
     try {
+      // list movies + searh movies included
       const response = await axios.get(
-        'https://api.dynoacademy.com/test-api/v1/movies'
+        `https://api.dynoacademy.com/test-api/v1/movies?search=${searchMovieText}`
       );
       setMovies(response.data.moviesData); //Axios le jaile pani "data" bhitra data haru pathako hunxa
       setIsError(false);
@@ -36,6 +45,15 @@ const Index = () => {
   return (
     <div className='App'>
       <b>SUGGESTED MOVIES:</b>
+
+      <div>
+        <input
+          type='text'
+          value={searchMovieText}
+          placeholder='Type movies title'
+          onChange={(e) => setSearchMovieText(e.target.value)}
+        />
+      </div>
 
       <br />
       {/* Error aako ra na-aako case ma k dekhaune: */}
