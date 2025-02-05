@@ -23,7 +23,7 @@ const ViewMovie = () => {
 
   return (
     <>
-      View Movie {getId}
+      View Movies {getId}
       <button onClick={getSingleMovieInfo}>
         View This movie Details!
       </button>{' '}
