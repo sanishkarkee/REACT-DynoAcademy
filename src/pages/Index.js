@@ -23,7 +23,14 @@ const Index = () => {
 
   // For Searching Movies
   useEffect(() => {
-    fetchMovies();
+    const fetchTimer = setTimeout(() => {
+      fetchMovies();
+    }, 2000);
+
+    // Cleanup function
+    return () => {
+      clearTimeout(fetchTimer);
+    };
   }, [searchMovieText]);
 
   const fetchMovies = async () => {
