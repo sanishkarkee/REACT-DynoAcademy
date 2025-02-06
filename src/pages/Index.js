@@ -20,6 +20,9 @@ const Index = () => {
   // Search ma 3 character na huda ko ERROR
   const [searchErrorText, setSearchErrorText] = useState('');
 
+  // Loading icon show garna when the process is running
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -46,6 +49,7 @@ const Index = () => {
   }, [searchMovieText]);
 
   const fetchMovies = async () => {
+    setLoading(true);
     setSearchErrorText('');
     try {
       // list movies + searh movies included
@@ -54,9 +58,11 @@ const Index = () => {
       );
       setMovies(response.data.moviesData); //Axios le jaile pani "data" bhitra data haru pathako hunxa
       setIsError(false);
+      setLoading(false);
     } catch (error) {
       setIsError(true);
       setErrorText('Cannot get movies info!');
+      setLoading(false);
     }
 
     console.log(movies);
@@ -97,24 +103,36 @@ const Index = () => {
           <div
             style={{ background: '#e7e7e7', padding: '10px', margin: '5px' }}
           >
-            {movies.map((el) => (
-              <div key={el.id} style={{ marginBottom: '20px' }}>
-                <Link to={`/view_movie/${el.id}`}>
-                  <span style={{ fontWeight: 'bold' }}>{el.name}</span>
-                </Link>
-                <br />
-                <img
-                  src={el.image}
-                  alt='Movie Image'
-                  style={{ width: '80px', height: '100px' }}
-                />
-                <br />
-                Info:{el.info}
-                <br />
-                Rating: {el.rating ? el.rating : '0'}
-                <br />
-              </div>
-            ))}
+            {/* Loading */}
+            <div>{loading ? <>loading.....</> : <></>}</div>
+
+            {movies.length < 1 ? (
+              <>
+                The movie <b> {searchMovieText} </b> isn't available in our
+                library!
+              </>
+            ) : (
+              <>
+                {movies.map((el) => (
+                  <div key={el.id} style={{ marginBottom: '20px' }}>
+                    <Link to={`/view_movie/${el.id}`}>
+                      <span style={{ fontWeight: 'bold' }}>{el.name}</span>
+                    </Link>
+                    <br />
+                    <img
+                      src={el.image}
+                      alt='Movie Image'
+                      style={{ width: '80px', height: '100px' }}
+                    />
+                    <br />
+                    Info:{el.info}
+                    <br />
+                    Rating: {el.rating ? el.rating : '0'}
+                    <br />
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </>
       )}
