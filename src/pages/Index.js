@@ -23,29 +23,34 @@ const Index = () => {
   // Loading icon show garna when the process is running
   const [loading, setLoading] = useState(false);
 
+  // loading 2 palta chalxa kina bhane : initial page load huda ra dependency change huda so yo behaviour hatauna lai use gareko ho
+  const [firstRun, setFirstRun] = useState(true);
+
   useEffect(() => {
     fetchMovies();
   }, []);
 
   // For Searching Movies
   useEffect(() => {
-    const fetchTimer = setTimeout(() => {
-      //Typed character 3 or more xa bhane display garne
-      if (searchMovieText && searchMovieText.length > 2) {
-        fetchMovies();
-      }
-      // 0 character xa bhane ,sabai movie display garne
-      else if (searchMovieText.length < 1) {
-        fetchMovies();
-      } else {
-        setSearchErrorText('Please enter atleast 3 characters for searching');
-      }
-    }, 2000);
+    if (!firstRun) {
+      const fetchTimer = setTimeout(() => {
+        //Typed character 3 or more xa bhane display garne
+        if (searchMovieText && searchMovieText.length > 2) {
+          fetchMovies();
+        }
+        // 0 character xa bhane ,sabai movie display garne
+        else if (searchMovieText.length < 1) {
+          fetchMovies();
+        } else {
+          setSearchErrorText('Please enter atleast 3 characters for searching');
+        }
+      }, 2000);
 
-    // Cleanup function
-    return () => {
-      clearTimeout(fetchTimer);
-    };
+      // Cleanup function
+      return () => {
+        clearTimeout(fetchTimer);
+      };
+    }
   }, [searchMovieText]);
 
   const fetchMovies = async () => {
@@ -59,10 +64,12 @@ const Index = () => {
       setMovies(response.data.moviesData); //Axios le jaile pani "data" bhitra data haru pathako hunxa
       setIsError(false);
       setLoading(false);
+      setFirstRun(false);
     } catch (error) {
       setIsError(true);
       setErrorText('Cannot get movies info!');
       setLoading(false);
+      setFirstRun(false);
     }
 
     console.log(movies);
@@ -106,7 +113,7 @@ const Index = () => {
             {/* Loading */}
             <div>{loading ? <>loading.....</> : <></>}</div>
 
-            {movies.length < 1 ? (
+            {!loading && movies.length < 1 ? (
               <>
                 The movie <b> {searchMovieText} </b> isn't available in our
                 library!
