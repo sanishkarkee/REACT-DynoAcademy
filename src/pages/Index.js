@@ -17,6 +17,9 @@ const Index = () => {
   // For Searching Movies
   const [searchMovieText, setSearchMovieText] = useState('');
 
+  // Search ma 3 character na huda ko ERROR
+  const [searchErrorText, setSearchErrorText] = useState('');
+
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -24,7 +27,16 @@ const Index = () => {
   // For Searching Movies
   useEffect(() => {
     const fetchTimer = setTimeout(() => {
-      fetchMovies();
+      //Typed character 3 or more xa bhane display garne
+      if (searchMovieText && searchMovieText.length > 2) {
+        fetchMovies();
+      }
+      // 0 character xa bhane ,sabai movie display garne
+      else if (searchMovieText.length < 1) {
+        fetchMovies();
+      } else {
+        setSearchErrorText('Please enter atleast 3 characters for searching');
+      }
     }, 2000);
 
     // Cleanup function
@@ -34,6 +46,7 @@ const Index = () => {
   }, [searchMovieText]);
 
   const fetchMovies = async () => {
+    setSearchErrorText('');
     try {
       // list movies + searh movies included
       const response = await axios.get(
@@ -60,6 +73,8 @@ const Index = () => {
           placeholder='Type movies title'
           onChange={(e) => setSearchMovieText(e.target.value)}
         />
+
+        <span style={{ color: 'red' }}>{searchErrorText}</span>
       </div>
 
       <br />
