@@ -80,6 +80,10 @@ const Index = () => {
       <b>SUGGESTED MOVIES:</b>
 
       <div>
+        <Link to='/add'>Add a Movie</Link>
+      </div>
+
+      <div>
         <input
           type='text'
           value={searchMovieText}
