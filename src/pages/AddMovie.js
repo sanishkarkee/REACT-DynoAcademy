@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const AddMovie = () => {
+  //Data submit paxi index page ma redirect garna lai
+  const history = useHistory();
+
   const movie_name_reference = useRef();
   const rating_reference = useRef();
   const desc_reference = useRef();
@@ -20,12 +23,22 @@ const AddMovie = () => {
     try {
       const response = await axios.post(
         'https://api.dynoacademy.com/test-api/v1/movies',
-        movieData
+        movieData,
+        {
+          timeout: 100000,
+        }
       );
 
       alert(response.data.message);
-    } catch (error) { 
-      alert()
+
+      history.replace('/');
+    } catch (error) {
+      // Known error ra unknown error aako bela k message show garne bhanera
+      if (error.response) {
+        alert(error.response.data.errors[0].message);
+      } else {
+        alert('Unknown error occured. Try again later.');
+      }
     }
   };
 
