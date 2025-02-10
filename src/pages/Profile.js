@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Profile = () => {
   const history = useHistory();
+
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     getProfile();
@@ -11,14 +13,25 @@ const Profile = () => {
 
   //   User login bhayeko bela matra profile chalna lai
   const getProfile = async () => {
+    const getAccessToken = localStorage.getItem('accessToken');
+
     try {
       const response = await axios.get(
         'https://api.dynoacademy.com/test-api/v1/me',
         {
           timeout: 100000,
+          //   yo chai Profile Content GET garna khojne user chai authorized ho bhanera prove garna lai acces token server ma pathako ho
+          //   authorized user ho bhane matra profile ko content acces garna paux natra paudaina
+          headers: {
+            Authorization: `Bearer ${getAccessToken}`,
+          },
         }
       );
-      console.log(response);
+      //-----"response" ra "response.data" ma kasari data aako xa bhanne bujna lai matra----
+      //   console.log(response);
+      //   console.log(response.data);
+      //   console.log(response.data.data);
+      setUserData(response.data.data);
     } catch (error) {
       // Known error ra unknown error aako bela k message show garne bhanera
       if (error.response) {
@@ -36,6 +49,10 @@ const Profile = () => {
 
   return (
     <>
+      <Link to='/'>Home</Link> <br /> <br />
+      Username: {userData.name} <br />
+      Email: {userData.email} <br />
+      Country: {userData.country} <br />
       <button onClick={onLogOut}>Logout</button>
     </>
   );
