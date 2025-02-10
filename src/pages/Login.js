@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Login = () => {
   const email = useRef();
   const password = useRef();
+
+  const history = useHistory();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -23,11 +26,16 @@ const Login = () => {
         }
       );
 
-      //   alert(response.data.message);
+      //   Access token lai variable ma save gareko
+      const getAccessToken = response.data.accessToken;
+
+      localStorage.setItem('accessToken', getAccessToken);
 
       if (response.data.status === 'success') {
         alert('Logged in successfully!');
       }
+
+      history.replace('/');
     } catch (error) {
       // Known error ra unknown error aako bela k message show garne bhanera
       if (error.response) {
