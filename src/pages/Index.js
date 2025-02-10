@@ -77,10 +77,9 @@ const Index = () => {
 
   return (
     <div className='App'>
-      <b>SUGGESTED MOVIES:</b>
-
       <div>
         <Link to='/add'>Add a Movie</Link>
+        <Link to='/login'>Login</Link>
       </div>
 
       <div>
