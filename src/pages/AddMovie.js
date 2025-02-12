@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import MovieNavBar from '../Components/MovieNavBar';
 
 const AddMovie = () => {
   //Data submit paxi index page ma redirect garna lai
@@ -44,7 +45,7 @@ const AddMovie = () => {
 
   return (
     <>
-      <Link to='/'>Home</Link>
+      <MovieNavBar />
       <br /> <br />
       <form onSubmit={addMovieHandler}>
         Movie Name: <br />

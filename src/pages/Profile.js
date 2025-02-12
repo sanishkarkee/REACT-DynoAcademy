@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import MovieNavBar from '../Components/MovieNavBar';
+import { Container } from 'react-bootstrap';
 
 const Profile = () => {
   const history = useHistory();
@@ -25,7 +27,7 @@ const Profile = () => {
           headers: {
             Authorization: `Bearer ${getAccessToken}`,
           },
-        } 
+        }
       );
       //-----"response" ra "response.data" ma kasari data aako xa bhanne bujna lai matra----
       //   console.log(response);
@@ -49,11 +51,14 @@ const Profile = () => {
 
   return (
     <>
-      <Link to='/'>Home</Link> <br /> <br />
-      Username: {userData.name} <br />
-      Email: {userData.email} <br />
-      Country: {userData.country} <br />
-      <button onClick={onLogOut}>Logout</button>
+      <MovieNavBar />
+
+      <Container className='mt-3'>
+        Username: {userData.name} <br />
+        Email: {userData.email} <br />
+        Country: {userData.country} <br /> <br />
+        <button onClick={onLogOut}>Logout</button>
+      </Container>
     </>
   );
 };

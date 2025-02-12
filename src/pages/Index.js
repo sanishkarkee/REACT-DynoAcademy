@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import MovieNavBar from '../Components/MovieNavBar';
 
 const Index = () => {
   // 3) -----ASYNCS-AWAIT
@@ -77,19 +78,7 @@ const Index = () => {
 
   return (
     <div className='App'>
-      <div>
-        <Link to='/add'>Add a Movie</Link> |
-        {/* logged in xa bhane "profile" page show garna instead of "login" */}
-        {localStorage.getItem('accessToken') ? (
-          <>
-            <Link to='/profile'>Profile</Link>
-          </>
-        ) : (
-          <>
-            <Link to='/login'>Login</Link>
-          </>
-        )}
-      </div>
+      <MovieNavBar />
 
       <div>
         <input

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import MovieNavBar from '../Components/MovieNavBar';
+import { Container } from 'react-bootstrap';
 
 const Login = () => {
   const email = useRef();
@@ -48,17 +50,21 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={loginHandler}>
-        Email: <br />
-        <input type='text' ref={email} />
-        <br />
-        <br />
-        Password: <br />
-        <input type='password' ref={password} />
-        <br />
-        <br />
-        <button>Login</button>
-      </form>
+      <MovieNavBar />
+
+      <Container className='m-5'>
+        <form onSubmit={loginHandler}>
+          Email: <br />
+          <input type='text' ref={email} />
+          <br />
+          <br />
+          Password: <br />
+          <input type='password' ref={password} />
+          <br />
+          <br />
+          <button>Login</button>
+        </form>
+      </Container>
     </>
   );
 };
