@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Button, Container } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ViewMovie = () => {
   const getParams = useParams(); // {id:'3'}
@@ -27,16 +28,40 @@ const ViewMovie = () => {
 
   return (
     <>
-      <b>View Movies: </b> {getId}
-      <br />
-      <h2>Movie Detail:</h2>
-      <br />
-      Movie Name: {movieData.name} <br /> <br />
-      Info: {movieData.info} <br /> <br />
-      Description: {movieData.desc} <br /> <br />
-      Rating: {movieData.rating} <br /> <br />
-      Image : <br /> <br />
-      <img src={movieData.image} alt='' style={{ height: '200px' }} />
+      <Container className='bg-info-subtle border border-1 rounded-2 border-dark-subtle mt-4'>
+        <p className='pt-2 mb-0'>View Movies:{getId} </p>
+        <br />
+        <h1 className='my-2'>{movieData.name}</h1>
+        <br />
+        Info:
+        <div class='card'>
+          <div class='card-body'>{movieData.info}</div>
+        </div>
+        <br />
+        <br />
+        Description:
+        <div class='card'>
+          <div class='card-body'>{movieData.desc}</div>
+        </div>
+        <br />
+        <br />
+        Rating:
+        <div class='card'>
+          <div class='card-body'>{movieData.rating}</div>
+        </div>
+        <br />
+        <br />
+        Image :
+        <div class='card'>
+          <div class='card-body'>
+            <img src={movieData.image} alt='' style={{ height: '200px' }} />
+          </div>
+        </div>
+        <br />
+        <Link to='/'>
+          <Button className='btn btn-success '>Go Back!</Button>
+        </Link>
+      </Container>
     </>
   );
 };

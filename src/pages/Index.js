@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 import MovieNavBar from '../Components/MovieNavBar';
 import SingleMovie from '../Components/SingleMovie';
 import { Container, Row } from 'react-bootstrap';
