@@ -57,7 +57,9 @@ const Profile = () => {
         Username: {userData.name} <br />
         Email: {userData.email} <br />
         Country: {userData.country} <br /> <br />
-        <button onClick={onLogOut}>Logout</button>
+        <button onClick={onLogOut} className='btn btn-danger'>
+          Logout
+        </button>
       </Container>
     </>
   );

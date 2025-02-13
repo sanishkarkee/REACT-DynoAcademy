@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MovieNavBar from '../Components/MovieNavBar';
+import { Container } from 'react-bootstrap';
 
 const AddMovie = () => {
   //Data submit paxi index page ma redirect garna lai
@@ -46,25 +47,55 @@ const AddMovie = () => {
   return (
     <>
       <MovieNavBar />
-      <br /> <br />
-      <form onSubmit={addMovieHandler}>
-        Movie Name: <br />
-        <input
-          type='text'
-          placeholder='Movie Name'
-          ref={movie_name_reference}
-        />
-        <br /> <br />
-        Ratings: <br />
-        <input
-          type='text'
-          placeholder='Rating'
-          ref={rating_reference}
-        /> <br /> <br />
-        Descritpion: <br />
-        <textarea ref={desc_reference}></textarea> <br /> <br />
-        <button type='submit'>Add a Movie</button>
-      </form>
+
+      <Container>
+        <form onSubmit={addMovieHandler}>
+          <h2 className='text-center py-3'>Enter movie details</h2>
+
+          <div className='p-5 border'>
+            <div className='mb-3'>
+              <label for='exampleFormControlInput1' class='form-label'>
+                Movie Name
+              </label>
+              <input
+                type='text'
+                className='form-control'
+                id='exampleFormControlInput1'
+                placeholder='Enter movie name '
+                ref={movie_name_reference}
+              />
+            </div>
+            <div className='mb-3'>
+              <label for='exampleFormControlInput2' class='form-label'>
+                Ratings
+              </label>
+              <input
+                type='number'
+                className='form-control'
+                id='exampleFormControlInput2'
+                placeholder='Enter ratings here '
+                ref={rating_reference}
+              />
+            </div>
+            <div className='mb-3'>
+              <label for='exampleFormControlTextarea1' class='form-label'>
+                Movies Description
+              </label>
+              <textarea
+                className='form-control'
+                id='exampleFormControlTextarea1'
+                rows='3'
+                placeholder='Movies description here'
+                ref={desc_reference}
+              ></textarea>
+            </div>
+
+            <button type='submit' className='btn btn-primary'>
+              Add a movie
+            </button>
+          </div>
+        </form>
+      </Container>
     </>
   );
 };

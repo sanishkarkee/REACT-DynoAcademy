@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import MovieNavBar from '../Components/MovieNavBar';
+import SingleMovie from '../Components/SingleMovie';
+import { Container, Row } from 'react-bootstrap';
 
 const Index = () => {
   // 3) -----ASYNCS-AWAIT
@@ -80,15 +82,26 @@ const Index = () => {
     <div className='App'>
       <MovieNavBar />
 
-      <div>
-        <input
-          type='text'
-          value={searchMovieText}
-          placeholder='Type movies title'
-          onChange={(e) => setSearchMovieText(e.target.value)}
-        />
+      <div className='my-3'>
+        <Container>
+          <input
+            type='text'
+            className='form-control'
+            value={searchMovieText}
+            placeholder='Type movie Title For Searching!'
+            onChange={(e) => setSearchMovieText(e.target.value)}
+          />
 
-        <span style={{ color: 'red' }}>{searchErrorText}</span>
+          {/* -------------- */}
+          {/* <input
+            type='text'
+            value={searchMovieText}
+            placeholder='Type movies title'
+            onChange={(e) => setSearchMovieText(e.target.value)}
+          /> */}
+
+          <span style={{ color: 'red' }}>{searchErrorText}</span>
+        </Container>
       </div>
 
       <br />
@@ -121,24 +134,28 @@ const Index = () => {
               </>
             ) : (
               <>
-                {movies.map((el) => (
-                  <div key={el.id} style={{ marginBottom: '20px' }}>
-                    <Link to={`/view_movie/${el.id}`}>
-                      <span style={{ fontWeight: 'bold' }}>{el.name}</span>
-                    </Link>
-                    <br />
-                    <img
-                      src={el.image}
-                      alt='Movie Image'
-                      style={{ width: '80px', height: '100px' }}
-                    />
-                    <br />
-                    Info:{el.info}
-                    <br />
-                    Rating: {el.rating ? el.rating : '0'}
-                    <br />
-                  </div>
-                ))}
+                <Row>
+                  {movies.map((el) => (
+                    // ----Bootstrap implement garda seperate component(<SingleMovie/>) banayera gareko----
+                    // <div key={el.id} style={{ marginBottom: '20px' }}>
+                    //   <Link to={`/view_movie/${el.id}`}>
+                    //     <span style={{ fontWeight: 'bold' }}>{el.name}</span>
+                    //   </Link>
+                    //   <br />
+                    //   <img
+                    //     src={el.image}
+                    //     alt='Movie Image'
+                    //     style={{ width: '80px', height: '100px' }}
+                    //   />
+                    //   <br />
+                    //   Info:{el.info}
+                    //   <br />
+                    //   Rating: {el.rating ? el.rating : '0'}
+                    //   <br />
+                    // </div>
+                    <SingleMovie data={el} />
+                  ))}
+                </Row>
               </>
             )}
           </div>
